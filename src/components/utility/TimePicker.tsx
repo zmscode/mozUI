@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../utils/tailwind";
-import { Button } from "../custom/button/Button";
+import { Button } from "../ui/button/Button";
 import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react";
 
 export interface TimePickerProps {
@@ -230,7 +230,9 @@ export const TimePicker = ({
 					</div>
 				</>
 			)}
-			<div className="text-base font-semibold opacity-0 select-none pointer-events-none">:</div>
+			<div className="text-base font-semibold opacity-0 select-none pointer-events-none">
+				:
+			</div>
 			<div className="flex flex-col items-center gap-0.5 min-w-8">
 				<Button
 					type="button"

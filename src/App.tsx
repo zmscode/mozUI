@@ -1,10 +1,10 @@
-import { Badge } from "./components/custom/badge/Badge";
+import { Badge } from "./components/ui/badge/Badge";
 import {
 	Card,
 	CardActions,
 	CardBody,
 	CardTitle,
-} from "./components/custom/card/Card";
+} from "./components/ui/card/Card";
 
 function App() {
 	return (
