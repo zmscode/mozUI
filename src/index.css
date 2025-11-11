@@ -35,3 +35,12 @@
 	--effect-depth: 1;
 	--effect-noise: 1;
 }
+
+@keyframes radio {
+	0% {
+		padding: 5px;
+	}
+	50% {
+		padding: 3px;
+	}
+}

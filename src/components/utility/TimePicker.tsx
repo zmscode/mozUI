@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../../utils/tailwind";
-import { Button } from "../ui/button/Button";
+import { Button } from "../ui/button/Button.new";
 import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react";
 
 export interface TimePickerProps {
