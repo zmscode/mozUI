@@ -1,0 +1,197 @@
+@reference "tailwindcss";
+
+.moz-ckb {
+	@layer mozui.component {
+		@apply relative inline-block shrink-0 cursor-pointer appearance-none p-1 align-middle;
+
+		--moz_ckb_size: calc(var(--size-selector, 0.25rem) * 6);
+
+		color: var(--color-base-content);
+		border-radius: var(--radius-selector);
+		border: var(--width-border) solid
+			var(
+				--moz_chk_color,
+				color-mix(in oklab, var(--color-base-content) 20%, #0000)
+			);
+		box-shadow: 0 1px oklch(0% 0 0 / calc(var(--effect-depth) * 0.1)) inset,
+			0 0 #0000 inset, 0 0 #0000;
+		transition: background-color 0.2s, box-shadow 0.2s;
+		width: var(--moz_ckb_size);
+		height: var(--moz_ckb_size);
+		background-size: auto, calc(var(--effect-noise) * 100%);
+		background-image: none, var(--effect-noise);
+
+		&:before {
+			--tw-content: "";
+			content: var(--tw-content);
+			@apply block size-full rotate-45 bg-current opacity-0;
+			transition: clip-path 0.3s, opacity 0.1s, rotate 0.3s,
+				translate 0.3s;
+			transition-delay: 0.1s;
+			clip-path: polygon(
+				20% 100%,
+				20% 80%,
+				50% 80%,
+				50% 80%,
+				70% 80%,
+				70% 100%
+			);
+			box-shadow: 0px 3px 0 0px
+				oklch(100% 0 0 / calc(var(--effect-depth) * 0.1)) inset;
+			font-size: 1rem;
+			line-height: 0.75;
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--moz_ckb_color, currentColor);
+			outline-offset: 2px;
+		}
+
+		&:checked,
+		&[aria-checked="true"] {
+			background-color: var(--moz_ckb_color, #0000);
+			box-shadow: 0 0 #0000 inset,
+				0 8px 0 -4px oklch(100% 0 0 / calc(var(--effect-depth) * 0.1)) inset,
+				0 1px oklch(0% 0 0 / calc(var(--effect-depth) * 0.1));
+
+			&:before {
+				clip-path: polygon(
+					20% 100%,
+					20% 80%,
+					50% 80%,
+					50% 0%,
+					70% 0%,
+					70% 100%
+				);
+				@apply opacity-100;
+			}
+			@media (forced-colors: active) {
+				&:before {
+					@apply rotate-0 bg-transparent [--tw-content:"✔︎"] [clip-path:none];
+				}
+			}
+			@media print {
+				&:before {
+					@apply rotate-0 bg-transparent;
+					--tw-content: "✔︎";
+					clip-path: none;
+				}
+			}
+		}
+
+		&:indeterminate {
+			background-color: var(
+				--moz_ckb_color,
+				color-mix(in oklab, var(--color-base-content) 20%, #0000)
+			);
+			&:before {
+				@apply rotate-0 opacity-100;
+				translate: 0 -35%;
+				clip-path: polygon(
+					20% 100%,
+					20% 80%,
+					50% 80%,
+					50% 80%,
+					80% 80%,
+					80% 100%
+				);
+			}
+		}
+	}
+}
+
+.moz-ckb:disabled {
+	@layer mozui.modifier {
+		@apply cursor-not-allowed opacity-20;
+	}
+}
+
+.moz-ckb-primary {
+	@layer mozui.modifier {
+		color: var(--color-primary-content);
+		--moz_ckb_color: var(--color-primary);
+	}
+}
+
+.moz-ckb-secondary {
+	@layer mozui.modifier {
+		color: var(--color-secondary-content);
+		--moz_ckb_color: var(--color-secondary);
+	}
+}
+.moz-ckb-accent {
+	@layer mozui.modifier {
+		color: var(--color-accent-content);
+		--moz_ckb_color: var(--color-accent);
+	}
+}
+
+.moz-ckb-neutral {
+	@layer mozui.modifier {
+		color: var(--color-neutral-content);
+		--moz_ckb_color: var(--color-neutral);
+	}
+}
+
+.moz-ckb-info {
+	@layer mozui.modifier {
+		color: var(--color-info-content);
+		--moz_ckb_color: var(--color-info);
+	}
+}
+
+.moz-ckb-success {
+	@layer mozui.modifier {
+		color: var(--color-success-content);
+		--moz_ckb_color: var(--color-success);
+	}
+}
+
+.moz-ckb-warning {
+	@layer mozui.modifier {
+		color: var(--color-warning-content);
+		--moz_ckb_color: var(--color-warning);
+	}
+}
+
+.moz-ckb-error {
+	@layer mozui.modifier {
+		color: var(--color-error-content);
+		--moz_ckb_color: var(--color-error);
+	}
+}
+
+.mozc-ckb-xs {
+	@layer mozui.modifier {
+		@apply p-0.5;
+		--moz_ckb_size: calc(var(--size-selector, 0.25rem) * 4);
+	}
+}
+
+.moz-ckb-sm {
+	@layer mozui.modifier {
+		@apply p-0.75;
+		--moz_ckb_size: calc(var(--size-selector, 0.25rem) * 5);
+	}
+}
+
+.moz-ckb-md {
+	@layer mozui.modifier {
+		@apply p-1;
+		--moz_ckb_size: calc(var(--size-selector, 0.25rem) * 6);
+	}
+}
+
+.moz-ckb-lg {
+	@layer mozui.modifier {
+		@apply p-1.25;
+		--moz_ckb_size: calc(var(--size-selector, 0.25rem) * 7);
+	}
+}
+
+.moz-ckb-xl {
+	@layer mozui.modifier {
+		@apply p-1.5;
+		--moz_ckb_size: calc(var(--size-selector, 0.25rem) * 8);
+	}
+}

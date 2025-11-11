@@ -1,0 +1,106 @@
+@reference "tailwindcss";
+
+.moz-sts {
+	@layer mozui.component {
+		@apply inline-block aspect-square size-2 bg-center bg-no-repeat align-middle text-black/30;
+		border-radius: var(--radius-selector);
+		background-image: radial-gradient(
+			circle at 35% 30%,
+			oklch(1 0 0 / calc(var(--effect-depth) * 0.5)),
+			#0000
+		);
+		background-color: color-mix(
+			in oklab,
+			var(--color-base-content) 20%,
+			transparent
+		);
+		box-shadow: 0 2px 3px -1px color-mix(in oklab, currentColor
+					calc(var(--effect-depth) * 100%), #0000);
+	}
+}
+
+.moz-sts-primary {
+	@layer mozui.modifier {
+		color: var(--color-primary);
+		background-color: var(--color-primary);
+	}
+}
+
+.moz-sts-secondary {
+	@layer mozui.modifier {
+		color: var(--color-secondary);
+		background-color: var(--color-secondary);
+	}
+}
+
+.moz-sts-accent {
+	@layer mozui.modifier {
+		color: var(--color-accent);
+		background-color: var(--color-accent);
+	}
+}
+
+.moz-sts-neutral {
+	@layer mozui.modifier {
+		color: var(--color-neutral);
+		background-color: var(--color-neutral);
+	}
+}
+
+.moz-sts-info {
+	@layer mozui.modifier {
+		color: var(--color-info);
+		background-color: var(--color-info);
+	}
+}
+
+.moz-sts-status {
+	@layer mozui.modifier {
+		color: var(--color-status);
+		background-color: var(--color-status);
+	}
+}
+
+.moz-sts-warning {
+	@layer mozui.modifier {
+		color: var(--color-warning);
+		background-color: var(--color-warning);
+	}
+}
+
+.moz-sts-error {
+	@layer mozui.modifier {
+		color: var(--color-error);
+		background-color: var(--color-error);
+	}
+}
+
+.moz-sts-xs {
+	@layer mozui.modifier {
+		@apply size-0.5;
+	}
+}
+
+.moz-sts-sm {
+	@layer mozui.modifier {
+		@apply size-1;
+	}
+}
+
+.moz-sts-md {
+	@layer mozui.modifier {
+		@apply size-2;
+	}
+}
+
+.moz-sts-lg {
+	@layer mozui.modifier {
+		@apply size-3;
+	}
+}
+
+.moz-sts-xl {
+	@layer mozui.modifier {
+		@apply size-4;
+	}
+}

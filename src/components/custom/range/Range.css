@@ -1,0 +1,228 @@
+@reference "tailwindcss";
+
+.moz-rng {
+	@layer mozui.component {
+		@apply cursor-pointer overflow-hidden bg-transparent align-middle;
+
+		--moz_rng_background: color-mix(in oklab, currentColor 10%, #0000);
+		--moz_rng_thumb: var(--color-base-100);
+		--moz_rng_thumb_size: calc(var(--size-selector, 0.25rem) * 6);
+		--moz_rng_progress: currentColor;
+		--moz_rng_fill: 1;
+		--moz_rng_padding: 0.25rem;
+		--moz_rng_radius_selector_max: calc(
+			var(--radius-selector) + var(--radius-selector) +
+				var(--radius-selector)
+		);
+
+		width: clamp(3rem, 20rem, 100%);
+		appearance: none;
+		-webkit-appearance: none;
+		border: none;
+		height: var(--moz_rng_thumb_size);
+		border-radius: calc(
+			var(--radius-selector) +
+				min(var(--moz_rng_padding), var(--moz_rng_radius_selector_max))
+		);
+
+		[dir="rtl"] & {
+			--moz_rng_directions: -1;
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		&:focus-visible {
+			outline: 2px solid;
+			outline-offset: 2px;
+		}
+
+		&::-webkit-slider-runnable-track {
+			@apply w-full;
+			background-color: var(--moz_rng_background);
+			border-radius: var(--radius-selector);
+			height: calc(var(--moz_rng_thumb_size) * 0.5);
+		}
+
+		@media (forced-colors: active) {
+			&::-webkit-slider-runnable-track {
+				border: 1px solid;
+			}
+		}
+
+		&::-webkit-slider-thumb {
+			@apply relative box-border;
+			border-radius: calc(
+				var(--radius-selector) +
+					min(
+						var(--moz_rng_padding),
+						var(--moz_rng_radius_selector_max)
+					)
+			);
+			background-color: var(--moz_rng_thumb);
+			height: var(--moz_rng_thumb_size);
+			width: var(--moz_rng_thumb_size);
+			border: var(--moz_rng_padding) solid;
+			appearance: none;
+			-webkit-appearance: none;
+			top: 50%;
+			color: var(--moz_rng_progress);
+			transform: translateY(-50%);
+			box-shadow: 0 -1px oklch(0% 0 0 / calc(var(--effect-depth) * 0.1)) inset,
+				0 8px 0 -4px oklch(100% 0 0 / calc(var(--effect-depth) * 0.1)) inset,
+				0 1px
+					color-mix(
+						in oklab,
+						currentColor calc(var(--effect-depth) * 10%),
+						#0000
+					),
+				0 0 0 2rem var(--moz_rng_thumb) inset,
+				calc(
+						(var(--moz_rng_directions, 1) * -100rem) -
+							(
+								var(--moz_rng_directions, 1) *
+									var(--moz_rng_thumb_size) / 2
+							)
+					)
+					0 0 calc(100rem * var(--moz_rng_fill));
+		}
+
+		&::-moz-range-track {
+			@apply w-full;
+			background-color: var(--moz_rng_background);
+			border-radius: var(--radius-selector);
+			height: calc(var(--moz_rng_thumb_size) * 0.5);
+		}
+
+		@media (forced-colors: active) {
+			&::-moz-range-track {
+				border: 1px solid;
+			}
+		}
+
+		&::-moz-range-thumb {
+			@apply relative box-border;
+			border-radius: calc(
+				var(--radius-selector) +
+					min(
+						var(--moz_rng_padding),
+						var(--moz_rng_radius_selector_max)
+					)
+			);
+			background-color: currentColor;
+			height: var(--moz_rng_thumb_size);
+			width: var(--moz_rng_thumb_size);
+			border: var(--moz_rng_padding) solid;
+			top: 50%;
+			color: var(--moz_rng_progress);
+			box-shadow: 0 -1px oklch(0% 0 0 / calc(var(--effect-depth) * 0.1)) inset,
+				0 8px 0 -4px oklch(100% 0 0 / calc(var(--effect-depth) * 0.1)) inset,
+				0 1px
+					color-mix(
+						in oklab,
+						currentColor calc(var(--effect-depth) * 10%),
+						#0000
+					),
+				0 0 0 2rem var(--moz_rng_thumb) inset,
+				calc(
+						(var(--moz_rng_directions, 1) * -100rem) -
+							(
+								var(--moz_rng_directions, 1) *
+									var(--moz_rng_thumb_size) / 2
+							)
+					)
+					0 0 calc(100rem * var(--moz_rng_fill));
+		}
+
+		&:disabled {
+			@apply cursor-not-allowed opacity-30;
+		}
+	}
+}
+
+.moz-rng-primary {
+	@layer mozui.modifier {
+		color: var(--color-primary);
+		--moz_rng_thumb: var(--color-primary-content);
+	}
+}
+
+.moz-rng-secondary {
+	@layer mozui.modifier {
+		color: var(--color-secondary);
+		--moz_rng_thumb: var(--color-secondary-content);
+	}
+}
+
+.moz-rng-accent {
+	@layer mozui.modifier {
+		color: var(--color-accent);
+		--moz_rng_thumb: var(--color-accent-content);
+	}
+}
+
+.moz-rng-neutral {
+	@layer mozui.modifier {
+		color: var(--color-neutral);
+		--moz_rng_thumb: var(--color-neutral-content);
+	}
+}
+
+.moz-rng-success {
+	@layer mozui.modifier {
+		color: var(--color-success);
+		--moz_rng_thumb: var(--color-success-content);
+	}
+}
+
+.moz-rng-warning {
+	@layer mozui.modifier {
+		color: var(--color-warning);
+		--moz_rng_thumb: var(--color-warning-content);
+	}
+}
+
+.moz-rng-info {
+	@layer mozui.modifier {
+		color: var(--color-info);
+		--moz_rng_thumb: var(--color-info-content);
+	}
+}
+
+.moz-rng-error {
+	@layer mozui.modifier {
+		color: var(--color-error);
+		--moz_rng_thumb: var(--color-error-content);
+	}
+}
+
+.moz-rng-xs {
+	@layer mozui.modifier {
+		--moz_rng_thumb_size: calc(var(--size-selector, 0.25rem) * 4);
+	}
+}
+
+.moz-rng-sm {
+	@layer mozui.modifier {
+		--moz_rng_thumb_size: calc(var(--size-selector, 0.25rem) * 5);
+	}
+}
+
+.moz-rng-md {
+	@layer mozui.modifier {
+		--moz_rng_thumb_size: calc(var(--size-selector, 0.25rem) * 6);
+	}
+}
+
+.moz-rng-lg {
+	@layer mozui.modifier {
+		--moz_rng_thumb_size: calc(var(--size-selector, 0.25rem) * 7);
+	}
+}
+
+.moz-rng-xl {
+	@layer mozui.modifier {
+		--moz_rng_thumb_size: calc(var(--size-selector, 0.25rem) * 8);
+	}
+}

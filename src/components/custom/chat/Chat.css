@@ -1,0 +1,172 @@
+@reference "tailwindcss";
+
+.moz-cht {
+	@layer mozui.component {
+		@apply grid gap-x-3 py-1;
+
+		--moz_cht_mask: url("data:image/svg+xml,%3csvg width='13' height='13' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill='black' d='M0 11.5004C0 13.0004 2 13.0004 2 13.0004H12H13V0.00036329L12.5 0C12.5 0 11.977 2.09572 11.8581 2.50033C11.6075 3.35237 10.9149 4.22374 9 5.50036C6 7.50036 0 10.0004 0 11.5004Z'/%3e%3c/svg%3e");
+	}
+}
+
+.moz-cht-bubble {
+	@layer mozui.component {
+		@apply relative block w-fit px-4 py-2;
+
+		background-color: var(--color-base-300);
+		color: var(--color-base-content);
+		border-radius: var(--radius-field);
+		grid-row-end: 3;
+		min-height: 2rem;
+		min-width: 2.5rem;
+		max-width: 90%;
+
+		&:before {
+			@apply absolute bottom-0 h-3 w-3;
+			background-color: inherit;
+			content: "";
+			mask-repeat: no-repeat;
+			mask-image: var(--moz_cht_mask);
+			mask-position: 0px -1px;
+			mask-size: 0.8125rem;
+		}
+	}
+}
+
+.moz-cht-bubble-primary {
+	@layer mozui.modifier {
+		background-color: var(--color-primary);
+		color: var(--color-primary-content);
+	}
+}
+
+.moz-cht-bubble-secondary {
+	@layer mozui.modifier {
+		background-color: var(--color-secondary);
+		color: var(--color-secondary-content);
+	}
+}
+
+.moz-cht-bubble-accent {
+	@layer mozui.modifier {
+		background-color: var(--color-accent);
+		color: var(--color-accent-content);
+	}
+}
+
+.moz-cht-bubble-neutral {
+	@layer mozui.modifier {
+		background-color: var(--color-neutral);
+		color: var(--color-neutral-content);
+	}
+}
+
+/* state colors */
+.moz-cht-bubble-info {
+	@layer mozui.modifier {
+		background-color: var(--color-info);
+		color: var(--color-info-content);
+	}
+}
+
+.moz-cht-bubble-success {
+	@layer mozui.modifier {
+		background-color: var(--color-success);
+		color: var(--color-success-content);
+	}
+}
+
+.moz-cht-bubble-warning {
+	@layer mozui.modifier {
+		background-color: var(--color-warning);
+		color: var(--color-warning-content);
+	}
+}
+
+.moz-cht-bubble-error {
+	@layer mozui.modifier {
+		background-color: var(--color-error);
+		color: var(--color-error-content);
+	}
+}
+
+.moz-cht-image {
+	@layer mozui.component {
+		@apply row-span-2 self-end;
+	}
+}
+
+.moz-cht-header {
+	@layer mozui.component {
+		@apply row-start-1 flex gap-1;
+		font-size: 0.6875rem;
+	}
+}
+
+.moz-cht-footer {
+	@layer mozui.component {
+		@apply row-start-3 flex gap-1;
+		font-size: 0.6875rem;
+	}
+}
+
+.moz-cht-start {
+	@layer mozui.modifier {
+		@apply place-items-start;
+		grid-template-columns: auto 1fr;
+
+		.moz-cht-header {
+			@apply col-start-2;
+		}
+
+		.moz-cht-footer {
+			@apply col-start-2;
+		}
+
+		.moz-cht-image {
+			@apply col-start-1;
+		}
+
+		.moz-cht-bubble {
+			@apply col-start-2 rounded-es-none;
+
+			&:before {
+				transform: rotateY(0deg);
+				inset-inline-start: -0.75rem;
+			}
+			[dir="rtl"] &:before {
+				transform: rotateY(180deg);
+			}
+		}
+	}
+}
+
+.moz-cht-end {
+	@layer mozui.modifier {
+		@apply place-items-end;
+		grid-template-columns: 1fr auto;
+
+		.moz-cht-header {
+			@apply col-start-1;
+		}
+
+		.moz-cht-footer {
+			@apply col-start-1;
+		}
+
+		.moz-cht-image {
+			@apply col-start-2;
+		}
+
+		.moz-cht-bubble {
+			@apply col-start-1 rounded-ee-none;
+
+			&:before {
+				transform: rotateY(180deg);
+				inset-inline-start: 100%;
+			}
+			[dir="rtl"] &:before {
+				transform: rotateY(0deg);
+			}
+		}
+	}
+}

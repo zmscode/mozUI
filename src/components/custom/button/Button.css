@@ -1,0 +1,463 @@
+@reference "tailwindcss";
+
+:where(.moz-btn) {
+	@layer mozui.component {
+		width: unset;
+	}
+}
+
+.moz-btn {
+	@layer mozui.component {
+		@apply inline-flex shrink-0 cursor-pointer flex-nowrap items-center justify-center gap-1.5 text-center align-middle outline-offset-2;
+
+		--moz_btn_padding: 1rem;
+		--moz_btn_background: var(--moz_btn_color, var(--color-base-200));
+		--moz_btn_foreground: var(--color-base-content);
+		--moz_btn_size: calc(var(--size-field, 0.25rem) * 10);
+		--moz_btn_border_color: color-mix(
+			in oklab,
+			var(--moz_btn_background),
+			#000 calc(var(--effect-depth) * 5%)
+		);
+		--moz_btn_border_width: var(--width-border);
+		--moz_btn_shadow: 0 3px 2px -2px color-mix(in oklab, var(
+							--moz_btn_background
+						)
+						calc(var(--effect-depth) * 30%), #0000),
+			0 4px 3px -2px color-mix(in oklab, var(--moz_btn_background)
+						calc(var(--effect-depth) * 30%), #0000);
+		--moz_btn_noise: var(--effect-noise);
+
+		padding-inline: var(--moz_btn_padding);
+		height: var(--moz_btn_size);
+		background-size: auto, calc(var(--effect-noise) * 100%);
+		border-start-start-radius: var(--join-ss, var(--radius-field));
+		border-start-end-radius: var(--join-se, var(--radius-field));
+		border-end-start-radius: var(--join-es, var(--radius-field));
+		border-end-end-radius: var(--join-ee, var(--radius-field));
+		border-width: var(--moz_btn_border_width);
+		border-style: solid;
+		border-color: var(--moz_btn_border_color);
+		color: var(--moz_btn_foreground);
+		background-color: var(--moz_btn_background);
+		outline-color: var(--moz_btn_color, var(--color-base-content));
+		background-image: none, var(--moz_btn_noise);
+		font-size: var(--moz_fontsize, 0.875rem);
+		font-weight: 600;
+		text-shadow: 0 0.5px oklch(100% 0 0 / calc(var(--effect-depth) * 0.15));
+		transition-property: color, background-color, border-color, box-shadow;
+		transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		transition-duration: 0.2s;
+		touch-action: manipulation;
+
+		@media (hover: hover) {
+			&:hover {
+				--moz_btn_background: color-mix(
+					in oklab,
+					var(--moz_btn_color, var(--color-base-200)),
+					#000 7%
+				);
+			}
+		}
+
+		&:focus-visible,
+		&:has(:focus-visible) {
+			outline-width: 2px;
+			outline-style: solid;
+			isolation: isolate;
+		}
+
+		&:active:not(.moz-btn-active) {
+			translate: 0 0.5px;
+			--moz_btn_background: color-mix(
+				in oklab,
+				var(--moz_btn_color, var(--color-base-200)),
+				#000 5%
+			);
+			--moz_btn_border_width: color-mix(
+				in oklab,
+				var(--moz_btn_color, var(--color-base-200)),
+				#000 7%
+			);
+			--moz_btn_shadow: 0 0 0 0 oklch(0% 0 0/0), 0 0 0 0 oklch(0% 0 0/0);
+		}
+	}
+}
+
+.moz-btn-disabled,
+.moz-btn:disabled,
+.moz-btn[disabled] {
+	@layer moz.modifier {
+		&:not(.moz-btn-link, .moz-btn-ghost) {
+			background-color: color-mix(
+				in oklab,
+				var(--color-base-content) 10%,
+				transparent
+			);
+			box-shadow: none;
+		}
+
+		@apply pointer-events-none;
+		--moz_btn_border_color: #0000;
+		--moz_btn_noise: none;
+		--moz_btn_foreground: color-mix(
+			in oklch,
+			var(--color-base-content) 20%,
+			#0000
+		);
+
+		@media (hover: hover) {
+			&:hover {
+				background-color: color-mix(
+						in oklab,
+						var(--color-neutral) 20%,
+						transparent
+					)
+					pointer-events-none;
+				--moz_btn_border_color: #0000;
+				--moz_btn_foreground: color-mix(
+					in oklch,
+					var(--color-base-content) 20%,
+					#0000
+				);
+			}
+		}
+	}
+}
+
+.moz-btn-active {
+	@layer mozui.modifier {
+		--moz_btn_background: color-mix(
+			in oklab,
+			var(--moz_btn_color, var(--color-base-200)),
+			#000 7%
+		);
+		--moz_btn_shadow: 0 0 0 0 oklch(0% 0 0/0), 0 0 0 0 oklch(0% 0 0/0);
+		isolation: isolate;
+	}
+}
+
+.moz-btn-primary {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-primary);
+		--moz_btn_foreground: var(--color-primary-content);
+	}
+}
+
+.moz-btn-secondary {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-secondary);
+		--moz_btn_foreground: var(--color-secondary-content);
+	}
+}
+
+.moz-btn-accent {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-accent);
+		--moz_btn_foreground: var(--color-accent-content);
+	}
+}
+
+.moz-btn-neutral {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-neutral);
+		--moz_btn_foreground: var(--color-neutral-content);
+	}
+}
+
+.moz-btn-info {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-info);
+		--moz_btn_foreground: var(--color-info-content);
+	}
+}
+
+.moz-btn-success {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-success);
+		--moz_btn_foreground: var(--color-success-content);
+	}
+}
+
+.moz-btn-warning {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-warning);
+		--moz_btn_foreground: var(--color-warning-content);
+	}
+}
+
+.moz-btn-error {
+	@layer mozui.modifier.color {
+		--moz_btn_color: var(--color-error);
+		--moz_btn_foreground: var(--color-error-content);
+	}
+}
+
+.moz-btn-ghost {
+	@layer mozui.modifier {
+		&:not(.moz-btn-active, :hover, :active:focus, :focus-visible) {
+			--moz_btn_shadow: "";
+			--moz_btn_background: #0000;
+			--moz_btn_border_color: #0000;
+			--moz_btn_noise: none;
+			&:not(:disabled, [disabled], .moz-btn-disabled) {
+				@apply outline-current;
+				--moz_btn_foreground: currentColor;
+			}
+		}
+
+		@media (hover: none) {
+			&:hover:not(
+					.moz-btn-active,
+					active,
+					:focus-visible,
+					:disabled,
+					[disabled],
+					.moz-btn-disabled
+				) {
+				--moz_btn_shadow: "";
+				--moz_btn_background: #0000;
+				--moz_btn_border_color: #0000;
+				--moz_btn_noise: none;
+				--moz_btn_foreground: currentColor;
+			}
+		}
+	}
+}
+
+.moz-btn-link {
+	@layer mozui.modifier {
+		@apply underline outline-current;
+		--moz_btn_border_color: #0000;
+		--moz_btn_background: #0000;
+		--moz_btn_foreground: var(--color-primary);
+		--moz_btn_noise: none;
+		--moz_btn_shadow: "";
+
+		&:is(.moz-btn-active, :hover, :active:focus, :focus-visible) {
+			@apply underline;
+			--moz_btn_border_color: #0000;
+			--moz_btn_background: #0000;
+		}
+
+		@media (hover: none) {
+			&:hover:not(
+					.moz-btn-active,
+					:active,
+					:focus-visible,
+					:disabled,
+					[disabled],
+					.moz-btn-disabled
+				) {
+				@apply no-underline;
+			}
+		}
+	}
+}
+
+.moz-btn-outline {
+	@layer mozui.modifier {
+		&:not(
+				.moz-btn-active,
+				:hover,
+				:active:focus,
+				:focus-visible,
+				:disabled,
+				[disabled],
+				.moz-btn-disabled,
+				:checked
+			) {
+			--moz_btn_shadow: "";
+			--moz_btn_background: #0000;
+			--moz_btn_foreground: var(--moz_btn_color);
+			--moz_btn_border_color: var(--moz_btn_color);
+			--moz_btn_noise: none;
+		}
+
+		@media (hover: none) {
+			&:hover:not(
+					.btn-active,
+					:active,
+					:focus-visible,
+					:disabled,
+					[disabled],
+					.btn-disabled,
+					:checked
+				) {
+				--moz_btn_shadow: "";
+				--moz_btn_background: #0000;
+				--moz_btn_foreground: var(--moz_btn_color);
+				--moz_btn_border_color: var(--moz_btn_color);
+				--moz_btn_noise: none;
+			}
+		}
+	}
+}
+
+.moz-btn-dash {
+	@layer mozui.modifier {
+		&:not(
+				.moz-btn-active,
+				:hover,
+				:active:focus,
+				:focus-visible,
+				:disabled,
+				[disabled],
+				.moz-btn-disabled,
+				:checked
+			) {
+			--moz_btn_shadow: "";
+			border-style: dashed;
+			--moz_btn_background: #0000;
+			--moz_btn_foreground: var(--moz_btn_color);
+			--moz_btn_border_color: var(--moz_btn_color);
+			--moz_btn_noise: none;
+		}
+
+		@media (hover: none) {
+			&:hover:not(
+					.moz-btn-active,
+					:active,
+					:focus-visible,
+					:disabled,
+					[disabled],
+					.moz-btn-disabled,
+					:checked
+				) {
+				--moz_btn_shadow: "";
+				border-style: dashed;
+				--moz_btn_background: #0000;
+				--moz_btn_foreground: var(--moz_btn_color);
+				--moz_btn_border_color: var(--moz_btn_color);
+				--moz_btn_noise: none;
+			}
+		}
+	}
+}
+
+.moz-btn-soft {
+	@layer mozui.modifier {
+		&:not(
+				.moz-btn-active,
+				:hover,
+				:active:focus,
+				:focus-visible,
+				:disabled,
+				[disabled],
+				.moz-btn-disabled
+			) {
+			--moz_btn_shadow: "";
+			--moz_btn_foreground: var(
+				--moz_btn_color,
+				var(--color-base-content)
+			);
+			--moz_btn_background: color-mix(
+				in oklab,
+				var(--moz_btn_color, var(--color-base-content)) 8%,
+				var(--color-base-100)
+			);
+			--moz_btn_border_color: color-mix(
+				in oklab,
+				var(--moz_btn_color, var(--color-base-content)) 10%,
+				var(--color-base-100)
+			);
+			--moz_btn_noise: none;
+		}
+
+		@media (hover: none) {
+			&:hover:not(
+					.moz-btn-active,
+					:active,
+					:focus-visible,
+					:disabled,
+					[disabled],
+					.moz-btn-disabled
+				) {
+				--moz_btn_shadow: "";
+				--moz_btn_foreground: var(
+					--moz_btn_color,
+					var(--color-base-content)
+				);
+				--moz_btn_background: color-mix(
+					in oklab,
+					var(--moz_btn_color, var(--color-base-content)) 8%,
+					var(--color-base-100)
+				);
+				--moz_btn_border_color: color-mix(
+					in oklab,
+					var(--moz_btn_color, var(--color-base-content)) 10%,
+					var(--color-base-100)
+				);
+				--moz_btn_noise: none;
+			}
+		}
+	}
+}
+
+.moz-btn-xs {
+	@layer mozui.modifier {
+		--moz_fontsize: 0.6875rem;
+		--moz_btn_padding: 0.5rem;
+		--moz_btn_size: calc(var(--size-field, 0.25rem) * 6);
+	}
+}
+
+.moz-btn-sm {
+	@layer mozui.modifier {
+		--moz_fontsize: 0.75rem;
+		--moz_btn_padding: 0.75rem;
+		--moz_btn_size: calc(var(--size-field, 0.25rem) * 8);
+	}
+}
+
+.moz-moz-btn-md {
+	@layer mozui.modifier {
+		--moz_fontsize: 0.875rem;
+		--moz_btn_padding: 1rem;
+		--moz_btn_size: calc(var(--size-field, 0.25rem) * 10);
+	}
+}
+
+.moz-btn-lg {
+	@layer mozui.modifier {
+		--moz_fontsize: 1.125rem;
+		--moz_btn_padding: 1.25rem;
+		--moz_btn_size: calc(var(--size-field, 0.25rem) * 12);
+	}
+}
+
+.moz-btn-xl {
+	@layer mozui.modifier {
+		--moz_fontsize: 1.375rem;
+		--moz_btn_padding: 1.5rem;
+		--moz_btn_size: calc(var(--size-field, 0.25rem) * 14);
+	}
+}
+
+.moz-btn-square {
+	@layer mozui.modifier {
+		@apply px-0;
+		width: var(--moz_btn_size);
+		height: var(--moz_btn_size);
+	}
+}
+
+.moz-btn-circle {
+	@layer mozui.modifier {
+		@apply rounded-full px-2;
+		width: var(--moz_btn_size);
+		height: var(--moz_btn_size);
+	}
+}
+
+.moz-btn-wide {
+	@layer mozui.modifier {
+		@apply w-full max-w-64;
+	}
+}
+
+.moz-btn-block {
+	@layer mozui.modifier {
+		@apply w-full;
+	}
+}

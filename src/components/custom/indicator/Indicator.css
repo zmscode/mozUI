@@ -1,0 +1,78 @@
+@reference "tailwindcss";
+
+.moz-ind {
+	@layer mozui.component {
+		@apply relative inline-flex;
+		width: max-content;
+
+		:where(.moz-ind-item) {
+			z-index: 1;
+			@apply absolute whitespace-nowrap;
+			top: var(--moz_ind_top, 0);
+			bottom: var(--moz_ind_bottom, auto);
+			left: var(--moz_ind_start, auto);
+			right: var(--moz_ind_end, 0);
+			translate: var(--moz_ind_x, 50%) var(--moz_ind_y, -50%);
+		}
+	}
+}
+
+.moz-ind-start {
+	@layer mozui.modifier {
+		--moz_ind_start: 0;
+		--moz_ind_end: auto;
+		--moz_ind_x: -50%;
+		[dir="rtl"] & {
+			--moz_ind_start: auto;
+			--moz_ind_end: 0;
+			--moz_ind_x: 50%;
+		}
+	}
+}
+
+.moz-ind-center {
+	@layer mozui.modifier {
+		--moz_ind_start: 50%;
+		--moz_ind_end: 50%;
+		--moz_ind_x: -50%;
+		[dir="rtl"] & {
+			--moz_ind_x: 50%;
+		}
+	}
+}
+
+.moz-ind-end {
+	@layer mozui.modifier {
+		--moz_ind_start: auto;
+		--moz_ind_end: 0;
+		--moz_ind_x: 50%;
+		[dir="rtl"] & {
+			--moz_ind_start: 0;
+			--moz_ind_end: auto;
+			--moz_ind_x: -50%;
+		}
+	}
+}
+
+.moz-ind-bottom {
+	@layer mozui.modifier {
+		--moz_ind_top: auto;
+		--moz_ind_bottom: 0;
+		--moz_ind_y: 50%;
+	}
+}
+.moz-ind-middle {
+	@layer mozui.modifier {
+		--moz_ind_top: 50%;
+		--moz_ind_bottom: 50%;
+		--moz_ind_y: -50%;
+	}
+}
+
+.moz-ind-top {
+	@layer mozui.modifier {
+		--moz_ind_top: 0;
+		--moz_ind_bottom: auto;
+		--moz_ind_y: -50%;
+	}
+}
