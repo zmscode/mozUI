@@ -1,0 +1,217 @@
+@reference "tailwindcss";
+
+.moz-crd {
+	@layer mozui.component {
+		@apply relative flex flex-col;
+
+		border-radius: var(--radius-box);
+		outline-width: 2px;
+		transition: outline 0.2s ease-in-out;
+		outline: 2px solid #0000;
+		outline-offset: 2px;
+
+		&:focus {
+			@apply outline-hidden;
+		}
+
+		&:focus-visible {
+			outline-color: currentColor;
+		}
+
+		:where(figure:first-child) {
+			@apply overflow-hidden;
+
+			border-start-start-radius: inherit;
+			border-start-end-radius: inherit;
+			border-end-start-radius: unset;
+			border-end-end-radius: unset;
+		}
+
+		:where(figure:last-child) {
+			@apply overflow-hidden;
+
+			border-start-start-radius: unset;
+			border-start-end-radius: unset;
+			border-end-start-radius: inherit;
+			border-end-end-radius: inherit;
+		}
+
+		figure {
+			@apply flex items-center justify-center;
+		}
+
+		&:has(> input:is(input[type="checkbox"], input[type="radio"])) {
+			@apply cursor-pointer;
+
+			user-select: none;
+		}
+		&:has(> :checked) {
+			outline: 2px solid currentColor;
+		}
+	}
+}
+
+.moz-crd-border {
+	@layer mozui.modifier {
+		border: var(--width-border) solid var(--color-base-200);
+	}
+}
+
+.moz-crd-dash {
+	@layer mozui.modifier {
+		border: var(--width-border) dashed var(--color-base-200);
+	}
+}
+
+.moz-crd-image-full {
+	@layer mozui.modifier {
+		@apply grid;
+
+		> * {
+			@apply col-start-1 row-start-1;
+		}
+
+		> .card-body {
+			@apply relative;
+			color: var(--color-neutral-content);
+		}
+
+		:where(figure) {
+			@apply overflow-hidden;
+			border-radius: inherit;
+		}
+
+		> figure img {
+			@apply h-full object-cover;
+			filter: brightness(28%);
+		}
+	}
+}
+
+.moz-crd-title {
+	@layer mozui.component {
+		@apply flex items-center gap-2;
+
+		font-size: var(--moz_crd_title_fs, 1.125rem);
+		font-weight: 600;
+	}
+}
+
+.moz-crd-body {
+	@layer mozui.component {
+		@apply flex flex-auto flex-col gap-2;
+
+		padding: var(--moz_crd_padding, 1.5rem);
+		font-size: var(--moz_crd_fs, 0.875rem);
+
+		:where(p) {
+			@apply grow;
+		}
+	}
+}
+
+.moz-crd-actions {
+	@layer mozui.component {
+		@apply flex flex-wrap items-start gap-2;
+	}
+}
+
+.moz-crd-xs {
+	@layer mozui.modifier {
+		.moz-crd-body {
+			--moz_crd_padding: 0.5rem;
+			--moz_crd_fs: 0.6875rem;
+		}
+
+		.moz-crd-title {
+			--moz_crd_title_fs: 0.875rem;
+		}
+	}
+}
+
+.moz-crd-sm {
+	@layer mozui.modifier {
+		.moz-crd-body {
+			--moz_crd_padding: 1rem;
+			--moz_crd_fs: 0.75rem;
+		}
+
+		.moz-crd-title {
+			--moz_crd_title_fs: 1rem;
+		}
+	}
+}
+
+.moz-crd-md {
+	@layer mozui.modifier {
+		.moz-crd-body {
+			--moz_crd_padding: 1.5rem;
+			--moz_crd_fs: 0.875rem;
+		}
+
+		.moz-crd-title {
+			--moz_crd_title_fs: 1.125rem;
+		}
+	}
+}
+
+.moz-crd-lg {
+	@layer mozui.modifier {
+		.moz-crd-body {
+			--moz_crd_padding: 2rem;
+			--moz_crd_fs: 1rem;
+		}
+
+		.moz-crd-title {
+			--moz_crd_title_fs: 1.25rem;
+		}
+	}
+}
+
+.moz-crd-xl {
+	@layer mozui.modifier {
+		.moz-crd-body {
+			--moz_crd_padding: 2.5rem;
+			--moz_crd_fs: 1.125rem;
+		}
+
+		.moz-crd-title {
+			--moz_crd_title_fs: 1.375rem;
+		}
+	}
+}
+
+.moz-crd-side {
+	@layer mozui.modifier {
+		align-items: stretch;
+		flex-direction: row;
+
+		:where(figure:first-child) {
+			@apply overflow-hidden;
+
+			border-start-start-radius: inherit;
+			border-start-end-radius: unset;
+			border-end-start-radius: inherit;
+			border-end-end-radius: unset;
+		}
+
+		:where(figure:last-child) {
+			@apply overflow-hidden;
+
+			border-start-start-radius: unset;
+			border-start-end-radius: inherit;
+			border-end-start-radius: unset;
+			border-end-end-radius: inherit;
+		}
+
+		figure > * {
+			max-width: unset;
+		}
+
+		:where(figure > *) {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}

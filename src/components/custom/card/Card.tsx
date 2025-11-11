@@ -1,23 +1,24 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../utils/tailwind";
+import { cn } from "../../../utils/tailwind";
+import { forwardRef, type HTMLAttributes } from "react";
+import "./Card.css";
 
-const cardVariants = cva("card", {
+const cardVariants = cva("moz-crd", {
 	variants: {
 		style: {
-			border: "card-border",
-			dash: "card-dash",
+			border: "moz-crd-border",
+			dash: "moz-crd-dash",
 		},
 		modifier: {
-			side: "card-side",
-			imageFull: "image-full",
+			side: "moz-crd-side",
+			imageFull: "moz-crd-image-full",
 		},
 		size: {
-			xs: "card-xs",
-			sm: "card-sm",
-			md: "card-md",
-			lg: "card-lg",
-			xl: "card-xl",
+			xs: "moz-crd-xs",
+			sm: "moz-crd-sm",
+			md: "moz-crd-md",
+			lg: "moz-crd-lg",
+			xl: "moz-crd-xl",
 		},
 	},
 	defaultVariants: {
@@ -25,11 +26,11 @@ const cardVariants = cva("card", {
 	},
 });
 
-const cardBodyVariants = cva("card-body");
+const cardBodyVariants = cva("moz-crd-body");
 
-const cardTitleVariants = cva("card-title");
+const cardTitleVariants = cva("moz-crd-title");
 
-const cardActionsVariants = cva("card-actions");
+const cardActionsVariants = cva("moz-crd-actions");
 
 const cardListVariants = cva("", {
 	variants: {
@@ -59,31 +60,30 @@ const cardListItemVariants = cva("", {
 });
 
 export interface CardProps
-	extends Omit<React.HTMLAttributes<HTMLDivElement>, "style">,
+	extends Omit<HTMLAttributes<HTMLDivElement>, "style">,
 		VariantProps<typeof cardVariants> {}
 
-export interface CardBodyProps
-	extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CardBodyProps extends HTMLAttributes<HTMLDivElement> {}
 
-export interface CardTitleProps
-	extends React.HTMLAttributes<HTMLHeadingElement> {}
+export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
 
-export interface CardActionsProps
-	extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CardActionsProps extends HTMLAttributes<HTMLDivElement> {}
 
 export interface CardListProps
-	extends React.HTMLAttributes<HTMLDivElement>,
+	extends HTMLAttributes<HTMLDivElement>,
 		VariantProps<typeof cardListVariants> {}
 
 export interface CardListItemProps
-	extends React.HTMLAttributes<HTMLDivElement>,
+	extends HTMLAttributes<HTMLDivElement>,
 		VariantProps<typeof cardListItemVariants> {}
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
+export const Card = forwardRef<HTMLDivElement, CardProps>(
 	({ className, style, modifier, size, ...props }, ref) => {
 		return (
 			<div
-				className={cn(cardVariants({ style, modifier, size, className }))}
+				className={cn(
+					cardVariants({ style, modifier, size, className })
+				)}
 				ref={ref}
 				{...props}
 			/>
@@ -91,7 +91,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 	}
 );
 
-const CardBody = React.forwardRef<HTMLDivElement, CardBodyProps>(
+export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
 	({ className, ...props }, ref) => {
 		return (
 			<div
@@ -103,7 +103,7 @@ const CardBody = React.forwardRef<HTMLDivElement, CardBodyProps>(
 	}
 );
 
-const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
+export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
 	({ className, ...props }, ref) => {
 		return (
 			<h2
@@ -115,7 +115,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
 	}
 );
 
-const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
+export const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
 	({ className, ...props }, ref) => {
 		return (
 			<div
@@ -127,7 +127,7 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
 	}
 );
 
-const CardList = React.forwardRef<HTMLDivElement, CardListProps>(
+export const CardList = forwardRef<HTMLDivElement, CardListProps>(
 	({ className, spacing, ...props }, ref) => {
 		return (
 			<div
@@ -139,11 +139,13 @@ const CardList = React.forwardRef<HTMLDivElement, CardListProps>(
 	}
 );
 
-const CardListItem = React.forwardRef<HTMLDivElement, CardListItemProps>(
+export const CardListItem = forwardRef<HTMLDivElement, CardListItemProps>(
 	({ className, active, disabled, ...props }, ref) => {
 		return (
 			<div
-				className={cn(cardListItemVariants({ active, disabled, className }))}
+				className={cn(
+					cardListItemVariants({ active, disabled, className })
+				)}
 				ref={ref}
 				{...props}
 			/>
@@ -157,18 +159,3 @@ CardTitle.displayName = "CardTitle";
 CardActions.displayName = "CardActions";
 CardList.displayName = "CardList";
 CardListItem.displayName = "CardListItem";
-
-export {
-	Card,
-	CardBody,
-	CardTitle,
-	CardActions,
-	CardList,
-	CardListItem,
-	cardVariants,
-	cardBodyVariants,
-	cardTitleVariants,
-	cardActionsVariants,
-	cardListVariants,
-	cardListItemVariants,
-};
